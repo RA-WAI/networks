@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { lettersOnlyValidator } from './letter-only.validator';
 import { RegisterService } from '../../services/register-service';
+import { PageLoaderService } from '../../services/page-loader-service';
 
 
 @Component({
@@ -15,13 +16,15 @@ import { RegisterService } from '../../services/register-service';
   styleUrl: './register.css'
 })
 export class Register implements OnInit {
-  
+
+  loading: boolean = false;
   form: FormGroup;
   
   constructor(
     private fb: FormBuilder, 
     private router: Router,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private loader: PageLoaderService
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), lettersOnlyValidator()]],
@@ -33,15 +36,12 @@ export class Register implements OnInit {
   }
   
   ngOnInit(): void {
-    //
+    
   }
   
   onSubmit() {
     
-    
     if (this.form.valid) {
-      
-      this.showAlert('warning', 'Your registration form is being submitted. Please wait...');
       
       this.form.value.date = new Date().toISOString().split('T')[0]; // Set current date in YYYY-MM-DD format 
       
