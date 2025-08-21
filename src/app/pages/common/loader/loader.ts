@@ -24,6 +24,7 @@ export class Loader {
     this.pageLoader.state
     .pipe(takeWhile(() => this._subscribed))
     .subscribe(loading => {
+      console.log('Loader state changed:', loading);
       this.loading = loading;
     });
     this.pageLoader.message

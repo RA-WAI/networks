@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RegisterService } from '../../services/register-service';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable, take } from 'rxjs';
 import { Register } from '../../interfaces/register';
+import { PageLoaderService } from '../../services/page-loader-service';
+import { after } from 'node:test';
 
 @Component({
   selector: 'app-list',
@@ -12,27 +14,36 @@ import { Register } from '../../interfaces/register';
 })
 export class List {
   
-  constructor(private registerService: RegisterService,) {
+  constructor(
+    private registerService: RegisterService) { 
+      
+    }
+    
+    records: Register[] = [];
+    newRecords: Register[] = [];
+    
+    ngOnInit(): void {
+      this.getRegisterdUsers();
+    }
+
+    getRegisterdUsers(): void {
+      this.loadRecords().then((data) => {
+        this.records = data;
+      }).catch((err) => {
+        console.error('Error loading records:', err);
+      });
+    } 
+    
+    async loadRecords(): Promise<Register[]> {
+      try {
+        const allRecords: Register[] = await this.registerService.getRecords();
+        return allRecords;
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+    }
+    
     
   }
   
-  records: Register[] = [];
-  
-  ngOnInit(): void {
-    this.loadRecords();
-  }
-  
-  loadRecords() {
-    this.registerService.getRecords().subscribe({
-      next: (data) => {
-        this.records = [...data];
-        this.records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-        console.log('Fetched records:', this.records);
-      },
-      error: (err) => console.error('Error fetching records:', err),
-      complete: () => console.log('Records fetched successfully'),
-    });
-  }
-  
-}
