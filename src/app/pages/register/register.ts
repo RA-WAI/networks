@@ -6,7 +6,6 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { lettersOnlyValidator } from './letter-only.validator';
 import { RegisterService } from '../../services/register-service';
-import { PageLoaderService } from '../../services/page-loader-service';
 
 
 @Component({
@@ -24,7 +23,6 @@ export class Register implements OnInit {
     private fb: FormBuilder, 
     private router: Router,
     private registerService: RegisterService,
-    private loader: PageLoaderService
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), lettersOnlyValidator()]],

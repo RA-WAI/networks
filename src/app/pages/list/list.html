@@ -1,0 +1,68 @@
+<section>
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="#" class="bg-inherit flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <label class="text-red-600">
+                STS
+            </label> &nbsp; Code Camp    
+        </a>
+        
+        <!-- <a [routerLink]="['about']" routerLinkActive="router-link-active" >About</a>
+        <button (click)="register()">Show Alert</button> -->
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div class="flex">
+                    <div class="w-1/2 p-4">
+                        <h1 class="text-x4 font-bold leading-tight tracking-tight text-gray-900 md:text-1xl text-orange-500">
+                            Registered Lists
+                        </h1>
+                    </div>
+                    <div class="w-1/2 p-4">
+                        <button
+                        (click)="loadRecords()"
+                        class=" px-4 py-2 text-white bg-blue-600 rounded-lg shadow 
+                        hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none
+                        dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300 float-right">
+                        Refresh Records
+                        
+                        <!-- px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md shadow 
+                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 float-right -->
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="overflow-x-auto">
+                
+                <table class="min-w-full border border-gray-200 text-sm">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Name</th>
+                            <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Phone</th>
+                            <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Email</th>
+                            <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (record of records; track record.id) {
+                            
+                            <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100">
+                                <td class="px-4 py-2 border-b">{{ record.name }}</td>
+                                <td class="px-4 py-2 border-b">{{ record.phone }}</td>
+                                <td class="px-4 py-2 border-b">{{ record.email }}</td>
+                                <td class="px-4 py-2 border-b">{{ record.date }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                
+            </div>
+            
+            
+        </div>
+    </div>
+    
+</div>
+
+
+
+</section>

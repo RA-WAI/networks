@@ -1,6 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { FirebaseService } from './firebase-service';
 import { PageLoaderService } from './page-loader-service';
+import { Observable } from 'rxjs';
+import { Register } from '../interfaces/register';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +13,9 @@ export class RegisterService {
   
   firebase = inject(FirebaseService);
   
-  async getRecords(date = null){
-    
-    this.firebase.getRegistration().subscribe({
-      next: value => {
-        return value;
-      },
-      error: error => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('Records fetched successfully');
-      }
-    });
+  getRecords(date: string | null = null): Observable<Register[]> {
+    // you can filter by `date` here if needed
+    return this.firebase.getRegistration();
     
   }
 

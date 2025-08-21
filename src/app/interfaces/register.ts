@@ -3,5 +3,6 @@ export interface Register {
     name: string;
     email?: string;
     phone: number;
-    gender: string
+    gender: string;
+    date: string;
 }
