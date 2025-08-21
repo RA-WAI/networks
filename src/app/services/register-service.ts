@@ -47,6 +47,17 @@ export class RegisterService {
     );
   }
   
+  async deleteRecord(id: string): Promise<void> {
+    this.loader.showLoader('Deleting record...', 50);
+    try {
+      await this.firebase.deleteRecord(id);
+      this.loader.hideLoader();
+      console.log(`Record with ID ${id} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting record with ID ${id}:`, error);
+      throw error;
+    }
+  }
   
   
 }

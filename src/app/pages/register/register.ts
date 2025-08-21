@@ -15,7 +15,7 @@ import { RegisterService } from '../../services/register-service';
   styleUrl: './register.css'
 })
 export class Register implements OnInit {
-
+  
   loading: boolean = false;
   form: FormGroup;
   
@@ -25,7 +25,7 @@ export class Register implements OnInit {
     private registerService: RegisterService,
   ) {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4), lettersOnlyValidator()]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
       gender: ['', [Validators.required]],
@@ -39,8 +39,14 @@ export class Register implements OnInit {
   
   onSubmit() {
     
+    this.form.markAllAsTouched();
+    // console.log('Form submitted:', this.form.value, this.form.valid);
+    // console.log(this.form.get('name')?.valid, 'name');
+    // console.log(this.form.get('email')?.valid);
+    // console.log(this.form.get('phone')?.valid);
+    // console.log(this.form.get('gender')?.valid);
     if (this.form.valid) {
-      
+      // console.log('valied form:');
       this.form.value.date = new Date().toISOString().split('T')[0]; // Set current date in YYYY-MM-DD format 
       
       this.registerService.addRecord(this.form.value).then(
@@ -61,6 +67,7 @@ export class Register implements OnInit {
         // this.showAlert('success', 'Your registration was successful. Let’s get started soon.');
       } else {
         this.form.markAllAsTouched();
+        console.log('Form is invalid:');
         return;
       }
     }

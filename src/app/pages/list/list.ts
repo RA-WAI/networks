@@ -25,7 +25,7 @@ export class List {
     ngOnInit(): void {
       this.getRegisterdUsers();
     }
-
+    
     getRegisterdUsers(): void {
       this.loadRecords().then((data) => {
         this.records = data;
@@ -44,6 +44,15 @@ export class List {
       }
     }
     
+    async deleteRecord(id: number): Promise<void> {
+      try {
+        await this.registerService.deleteRecord(String(id));
+        this.records = this.records.filter(record => record.id !== Number(id));
+        
+      } catch (err) {
+        console.error('Error deleting record:', err);
+      }
+    }
     
   }
   
