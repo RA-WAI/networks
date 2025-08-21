@@ -48,10 +48,10 @@ export class RegisterService {
   }
   
   async deleteRecord(id: string): Promise<void> {
-    this.loader.showLoader('Deleting record...', 50);
+    // this.loader.showLoader('Deleting record...', 50);
     try {
       await this.firebase.deleteRecord(id);
-      this.loader.hideLoader();
+      // this.loader.hideLoader();
       console.log(`Record with ID ${id} deleted successfully.`);
     } catch (error) {
       console.error(`Error deleting record with ID ${id}:`, error);
@@ -59,5 +59,13 @@ export class RegisterService {
     }
   }
   
+  toogleLoader(state:boolean) {
+    if (state) {
+      this.loader.showLoader('Please wait, your form is being submitted.', 50);
+    } else {
+      this.loader.hideLoader();
+    } 
+
+  }
   
 }

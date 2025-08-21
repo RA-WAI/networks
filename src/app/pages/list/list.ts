@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Route, RouterModule, Router } from '@angular/router';
 import { RegisterService } from '../../services/register-service';
 import { firstValueFrom, Observable, take } from 'rxjs';
 import { Register } from '../../interfaces/register';
 import { PageLoaderService } from '../../services/page-loader-service';
 import { after } from 'node:test';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -15,9 +16,12 @@ import { after } from 'node:test';
 export class List {
   
   constructor(
-    private registerService: RegisterService) { 
+    private registerService: RegisterService,
+    private router: Router
+  ) { 
       
     }
+    
     
     records: Register[] = [];
     newRecords: Register[] = [];
@@ -48,10 +52,40 @@ export class List {
       try {
         await this.registerService.deleteRecord(String(id));
         this.records = this.records.filter(record => record.id !== Number(id));
+        this.showAlert('success', 'Your registration was successful. Let’s get started soon.');
         
       } catch (err) {
         console.error('Error deleting record:', err);
       }
+    }
+    
+    showAlert(icon:any, message:string) {
+      
+      let title = '';
+      switch(message) {
+        case 'success':
+        title = 'Success!';
+        break;
+        case 'error':
+        title = 'Error!';
+        break;
+        case 'warning':
+        title = 'Warning!'; 
+        break;
+      };
+      
+      Swal.fire({
+        title: message == title,
+        text: message,
+        icon: icon,
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Call your method here
+          this.registerService.toogleLoader(false);
+          this.getRegisterdUsers(); // Refresh the list after deletion
+        }
+      });
     }
     
   }
