@@ -39,25 +39,25 @@
                             <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Phone</th>
                             <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Email</th>
                             <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Date</th>
-                            <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Action</th>
+                            <!-- <th class="px-4 py-2 border-b text-left font-semibold text-gray-700">Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         @for (record of records; track record.id; let i = $index) {
                             
                             <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100">
-                                <td class="px-4 py-2 border-b">{{ ++i }}</td>
+                                <td class="px-4 py-2 border-b">{{ ++i + 1 }}</td>
                                 <td class="px-4 py-2 border-b">{{ record.name }}</td>
                                 <td class="px-4 py-2 border-b">{{ record.phone }}</td>
                                 <td class="px-4 py-2 border-b">{{ record.email }}</td>
                                 <td class="px-4 py-2 border-b">{{ record.date }}</td>
-                                <td class="px-4 py-2 border-b">
+                                <!-- <td class="px-4 py-2 border-b">
                                     <button
                                     (click)="deleteRecord(record.id)"
                                     class="text-xs px-2 py-1 rounded font-medium
                                     bg-red-500 text-white hover:bg-red-600
                                     dark:bg-red-600 dark:hover:bg-red-700 dark:text-white">Delete</button>
-                                </td>
+                                </td> -->
                             </tr>
                         }
                     </tbody>

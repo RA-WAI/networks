@@ -15,7 +15,7 @@ export const routes: Routes = [
         title: 'About',
     },
     {
-        path: 'registered-list/:id',
+        path: 'registered-list',
         component: List, 
         title: 'User List',
     },

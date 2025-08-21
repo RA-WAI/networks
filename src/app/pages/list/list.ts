@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { Route, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { RegisterService } from '../../services/register-service';
-import { firstValueFrom, Observable, take } from 'rxjs';
 import { Register } from '../../interfaces/register';
-import { PageLoaderService } from '../../services/page-loader-service';
-import { after } from 'node:test';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,11 +15,9 @@ export class List {
   constructor(
     private registerService: RegisterService,
     private router: Router,
-    private route: ActivatedRoute
   ) { 
     
   }
-  
   
   records: Register[] = [];
   newRecords: Register[] = [];
@@ -30,13 +25,6 @@ export class List {
   
   ngOnInit(): void {
     this.getRegisterdUsers();
-    
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id') || '';
-      if (this.id !== 'bec7b13b-887f-4801-a907-a2e37ba2d116') {
-        this.router.navigate(['/']);
-      }
-    });
   }
   
   getRegisterdUsers(): void {
